@@ -1,0 +1,40 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "urlsum"
+version = "0.1.0"
+description = "CLI tool that fetches a URL and returns a concise summary via the Anthropic API"
+requires-python = ">=3.11"
+dependencies = [
+    "anthropic",
+    "httpx",
+    "trafilatura",
+    "typer",
+]
+
+[project.optional-dependencies]
+dev = [
+    "mypy",
+    "pytest",
+    "respx",
+    "ruff",
+]
+
+[project.scripts]
+urlsum = "urlsum.cli:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/urlsum"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
